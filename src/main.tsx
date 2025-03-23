@@ -7,6 +7,8 @@ import { routeTree } from './routeTree.gen';
 
 import '@radix-ui/themes/styles.css';
 
+import './i18n';
+
 const router = createRouter({ routeTree, defaultPreload: 'intent' });
 
 declare module '@tanstack/react-router' {
