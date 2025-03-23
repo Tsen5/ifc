@@ -38,6 +38,15 @@ export class IfcDate {
 
     const MS_PER_DAY = this.MS_PER_SECOND * this.SECONDS_PER_MINUTE * this.MINUTES_PER_HOUR * this.HOURS_PER_DAY;
 
+    // return (
+    //     (Date.UTC(this.date.getFullYear(), this.date.getMonth(), this.date.getDate()) -
+    //       Date.UTC(this.date.getFullYear(), 0, 0)) /
+    //     this.HOURS_PER_DAY /
+    //     this.MINUTES_PER_HOUR /
+    //     this.SECONDS_PER_MINUTE /
+    //     this.MS_PER_SECOND
+    //   );
+
     return Math.floor(diff / MS_PER_DAY);
   }
 
@@ -72,7 +81,14 @@ export class IfcDate {
     if (this.isLeapDay() || this.isYearDay()) {
       return 29;
     }
-    const dayOfYear = this.getDayOfYear();
+    let dayOfYear = this.getDayOfYear();
+
+    // Si on est dans une année bissextile et après le Leap Day,
+    // on doit soustraire 1 pour compenser le décalage
+    if (this.isLeapYear() && dayOfYear > this.LEAP_DAY) {
+      dayOfYear -= 1;
+    }
+
     return dayOfYear % this.DAYS_PER_MONTH || this.DAYS_PER_MONTH;
   }
 
@@ -83,7 +99,9 @@ export class IfcDate {
     if (this.isYearDay()) {
       return this.YEAR_DAY_MONTH;
     }
-    return Math.ceil(this.getDayOfYear() / this.DAYS_PER_MONTH);
+    const daysPerMonth =
+      (this.DAYS_PER_MONTH * this.MONTHS_PER_YEAR + (this.isLeapYear() ? 1 : 0)) / this.MONTHS_PER_YEAR;
+    return Math.ceil(this.getDayOfYear() / daysPerMonth);
   }
 
   // Méthodes héritées de la classe Date
@@ -127,7 +145,13 @@ export class IfcDate {
       throw new Error("Le 29 n'est valide que pour le Year Day et le Leap Day");
     }
 
-    const dayOfYear = (currentMonth - 1) * this.DAYS_PER_MONTH + date;
+    let dayOfYear = (currentMonth - 1) * this.DAYS_PER_MONTH + date;
+
+    // Si on est dans une année bissextile et qu'on est après juin
+    if (this.isLeapYear() && currentMonth > this.LEAP_DAY_MONTH) {
+      dayOfYear += 1; // On ajoute un jour pour compenser le Leap Day
+    }
+
     const newDate = new Date(this.date);
     newDate.setMonth(0, dayOfYear);
     this.date = newDate;
