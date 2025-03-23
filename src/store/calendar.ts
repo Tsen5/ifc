@@ -1,12 +1,14 @@
 import { create } from 'zustand';
 
+import { IfcDate } from '../helpers/IfcDate';
+
 interface CalendarState {
-  selectedDate: Date;
-  setSelectedDate: (newSelectedDate: Date) => void;
+  selectedDate: IfcDate;
+  setSelectedDate: (newSelectedDate: IfcDate) => void;
 }
 
 const useCalendarStore = create<CalendarState>()((set) => ({
-  selectedDate: new Date(),
+  selectedDate: new IfcDate(),
   setSelectedDate: (newSelectedDate) => set(() => ({ selectedDate: newSelectedDate })),
 }));
 
