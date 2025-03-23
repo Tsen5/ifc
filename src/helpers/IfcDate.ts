@@ -62,7 +62,7 @@ export class IfcDate {
     return this.isLeapYear() && dayOfYear === this.LEAP_DAY;
   }
 
-  private isLeapYear(): boolean {
+  isLeapYear(): boolean {
     const year = this.date.getFullYear();
     return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
   }
@@ -146,17 +146,36 @@ export class IfcDate {
     return this.getTime();
   }
 
-  // Méthodes de comparaison
-  equals(other: IfcDate): boolean {
-    return this.date.getTime() === other.date.getTime();
+  setYear(year: number): number {
+    if (year < 0) {
+      throw new Error('Année invalide pour le calendrier fixe');
+    }
+
+    const newDate = new Date(this.date);
+    newDate.setFullYear(year);
+    this.date = newDate;
+    return this.getTime();
   }
 
+  // Méthodes de comparaison
   isBefore(other: IfcDate): boolean {
     return this.date.getTime() < other.date.getTime();
   }
 
   isAfter(other: IfcDate): boolean {
     return this.date.getTime() > other.date.getTime();
+  }
+
+  isEqual(other: IfcDate): boolean {
+    return this.date.getTime() === other.date.getTime();
+  }
+
+  isSameDate(other: IfcDate): boolean {
+    return (
+      this.getFullYear() === other.getFullYear() &&
+      this.getMonth() === other.getMonth() &&
+      this.getDate() === other.getDate()
+    );
   }
 
   // Méthodes statiques
