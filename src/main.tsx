@@ -1,9 +1,11 @@
+import { ThemeProvider } from '@emotion/react';
 import { Theme } from '@radix-ui/themes';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 
 import { routeTree } from './routeTree.gen';
+import theme from './theme';
 
 import '@radix-ui/themes/styles.css';
 
@@ -23,7 +25,9 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <Theme accentColor="ruby" grayColor="mauve" radius="large" appearance="dark">
-        <RouterProvider router={router} />
+        <ThemeProvider theme={theme}>
+          <RouterProvider router={router} />
+        </ThemeProvider>
       </Theme>
     </StrictMode>
   );
