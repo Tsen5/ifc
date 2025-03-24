@@ -29,7 +29,7 @@ export class IfcDate {
     }
   }
 
-  private getDayOfYear(): number {
+  getDayOfYear(): number {
     const start = new Date(this.date.getFullYear(), 0, 0);
     const diff =
       this.date.getTime() -
