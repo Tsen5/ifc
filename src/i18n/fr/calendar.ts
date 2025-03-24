@@ -1,4 +1,12 @@
 export default {
+  title: {
+    events: 'Évènements',
+    currentYearEvents: 'Cette année',
+    otherYearEvents: 'Autres années',
+  },
+  text: {
+    noEvents: 'Aucun évènement',
+  },
   months: {
     month_1: 'Janvier',
     month_2: 'Février',
@@ -20,6 +28,8 @@ export default {
   },
   button: {
     today: "Aujourd'hui",
+    seeMore: 'Voir plus ({{count}})',
+    close: 'Fermer',
   },
   days: {
     short: {
