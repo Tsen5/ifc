@@ -3,9 +3,13 @@ export default {
     events: 'Évènements',
     currentYearEvents: 'Cette année',
     otherYearEvents: 'Autres années',
+    page: 'Le Calendrier Fixe',
   },
   text: {
     noEvents: 'Aucun évènement',
+    dayOfYear: 'Jour n°{{day}}',
+    gregorianDate: 'Date du calendrier grégorien : {{date}}',
+    whatIsIt: "Qu'est-ce que c'est ?",
   },
   months: {
     month_1: 'Janvier',
