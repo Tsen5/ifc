@@ -54,7 +54,7 @@ export class IfcDate {
    * Vérifie si la date courante est le dernier jour de l'année (Year Day).
    * Ce jour spécial suit le 28e jour du 13e mois.
    */
-  private isYearDay(): boolean {
+  isYearDay(): boolean {
     const dayOfYear = this.getDayOfYear();
     return (
       (!this.isLeapYear() && dayOfYear === this.DAYS_IN_NORMAL_YEAR) ||
@@ -66,7 +66,7 @@ export class IfcDate {
    * Vérifie si la date courante est le jour bissextile (Leap Day).
    * Ce jour spécial est ajouté après le 28 juin lors des années bissextiles.
    */
-  private isLeapDay(): boolean {
+  isLeapDay(): boolean {
     const dayOfYear = this.getDayOfYear();
     return this.isLeapYear() && dayOfYear === this.LEAP_DAY;
   }
