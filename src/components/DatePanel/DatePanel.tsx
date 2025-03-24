@@ -15,12 +15,25 @@ function DatePanel() {
       <Inset side="top" clip="padding-box">
         <Card>
           <Flex direction="column" justify="center" align="center" pb="1">
-            <Text css={{ lineHeight: '1' }} weight="bold" color="ruby" size="9">
-              {selectedDate.getDate()}
-            </Text>
-            <Text css={{ lineHeight: '1' }} weight="bold" color="ruby" size="7" mb="1">
-              {t('months.month', { context: `${selectedDate.getMonth()}` })}
-            </Text>
+            {!selectedDate.isYearDay() && !selectedDate.isLeapDay() ? (
+              <>
+                <Text css={{ lineHeight: '1' }} weight="bold" color="ruby" size="9">
+                  {selectedDate.getDate()}
+                </Text>
+                <Text css={{ lineHeight: '1' }} weight="bold" color="ruby" size="7" mb="1">
+                  {t('months.month', { context: `${selectedDate.getMonth()}` })}
+                </Text>
+              </>
+            ) : (
+              <>
+                <Text weight="bold" color="ruby" size="6" mb="1">
+                  {t('text.epagomenalDay')}
+                </Text>
+                <Text weight="bold" color="ruby" size="8" mb="1">
+                  {selectedDate.isYearDay() ? t('text.yearDay') : t('text.leapDay')}
+                </Text>
+              </>
+            )}
             <Text css={{ lineHeight: '1' }} weight="bold" color="ruby" size="7">
               {selectedDate.getFullYear()}
             </Text>
