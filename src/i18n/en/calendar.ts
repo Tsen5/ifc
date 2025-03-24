@@ -10,6 +10,9 @@ export default {
     dayOfYear: 'Day n°{{day}}',
     gregorianDate: 'Gregorian date: {{date}}',
     whatIsIt: 'What is it?',
+    epagomenalDay: 'Epagomenal day',
+    yearDay: 'Year day',
+    leapDay: 'Leap day',
   },
   months: {
     month_1: 'January',

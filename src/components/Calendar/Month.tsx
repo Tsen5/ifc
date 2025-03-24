@@ -1,17 +1,20 @@
 import { useTheme } from '@emotion/react';
 import { useCallback, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { IfcDate } from '../../helpers/IfcDate';
 import { useCalendarStore } from '../../store/calendar';
 
 import Day from './Day/Day';
 import DayName from './Day/DayName';
+import EpagomenalDay from './EpagomenalDay';
 
 export interface MonthProps {
   currentMonthDate: IfcDate;
 }
 
 function Month({ currentMonthDate }: MonthProps) {
+  const { t } = useTranslation('calendar');
   const theme = useTheme();
 
   const setSelectedDate = useCalendarStore((state) => state.setSelectedDate);
@@ -34,23 +37,29 @@ function Month({ currentMonthDate }: MonthProps) {
   );
 
   return (
-    <div
-      css={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(7, 1fr)',
-        textAlign: 'center',
-        gap: theme.sizing.spacing(2),
-      }}
-    >
-      {days.slice(0, 7).map((day) => (
-        <DayName key={day} day={day} />
-      ))}
-      {days.map((day) => (
-        <Day key={day} day={day} onSelectDay={handleSelectDate} currentMonthDate={currentMonthDate} />
-      ))}
-      {hasLeapDay && <Day day={29} onSelectDay={handleSelectDate} currentMonthDate={currentMonthDate} />}
-      {hasYearDay && <Day day={29} onSelectDay={handleSelectDate} currentMonthDate={currentMonthDate} />}
-    </div>
+    <>
+      <div
+        css={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(7, 1fr)',
+          textAlign: 'center',
+          gap: theme.sizing.spacing(2),
+        }}
+      >
+        {days.slice(0, 7).map((day) => (
+          <DayName key={day} day={day} />
+        ))}
+        {days.map((day) => (
+          <Day key={day} day={day} onSelectDay={handleSelectDate} currentMonthDate={currentMonthDate} />
+        ))}
+      </div>
+      {hasYearDay && (
+        <EpagomenalDay label={t('text.yearDay')} onSelectDay={handleSelectDate} currentMonthDate={currentMonthDate} />
+      )}
+      {hasLeapDay && (
+        <EpagomenalDay label={t('text.leapDay')} onSelectDay={handleSelectDate} currentMonthDate={currentMonthDate} />
+      )}
+    </>
   );
 }
 

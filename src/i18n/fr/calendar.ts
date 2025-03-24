@@ -10,6 +10,9 @@ export default {
     dayOfYear: 'Jour n°{{day}}',
     gregorianDate: 'Date du calendrier grégorien : {{date}}',
     whatIsIt: "Qu'est-ce que c'est ?",
+    epagomenalDay: 'Jour épagomène',
+    yearDay: "Jour de l'année",
+    leapDay: 'Jour bissextile',
   },
   months: {
     month_1: 'Janvier',
