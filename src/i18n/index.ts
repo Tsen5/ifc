@@ -27,7 +27,7 @@ i18n
     fallbackLng,
     resources,
     defaultNS,
-    debug: true,
+    debug: false,
     interpolation: {
       escapeValue: false,
     },
